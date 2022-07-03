@@ -28,12 +28,20 @@ class App extends React.Component {
 
     tracks.push(track);
     this.setState({playlistTracks: tracks});
+
+    let newResults = this.state.searchResults;
+    newResults = newResults.filter(resultTrack => resultTrack.id !== track.id);
+    this.setState({searchResults: newResults});
   }
 
   removeTrack(track) {
     let tracks = this.state.playlistTracks;
     tracks = tracks.filter(currentTrack => currentTrack.id !== track.id);
     this.setState({playlistTracks: tracks});
+
+    const newResults = this.state.searchResults;
+    newResults.unshift(track);
+    this.setState({searchResults: newResults});
   }
 
   updatePlaylistName(name) {
@@ -52,9 +60,17 @@ class App extends React.Component {
 
   search(term) {
     Spotify.search(term).then(searchResults => {
-      this.setState({ searchResults: searchResults });
+      if(this.state.playlistTracks.length === 0) {
+        this.setState({ searchResults: searchResults });
+        return;
+      }
+
+      const newPlaylistTracksIDs = this.state.playlistTracks.map(track => track.id);
+      const newResults = searchResults.filter(resultTrack => !newPlaylistTracksIDs.includes(resultTrack.id));
+      this.setState({ searchResults: newResults });
     });
-    this.setState({timesSearch: this.state.timesSearch + 1})
+
+    this.setState({timesSearch: this.state.timesSearch + 1});
   }
 
   render() {
