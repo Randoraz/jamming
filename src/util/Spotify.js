@@ -1,5 +1,5 @@
 const clientID = '5b6f8d1b85a543459fcfe35b9fa324cc';
-const redirectURI = 'https://randoraz_jammming.netlify.app';
+const redirectURI = 'https://randoraz-jammming.netlify.app';
 //const redirectURI = 'http://randoraz_jammming.surge.sh';
 
 let token;
