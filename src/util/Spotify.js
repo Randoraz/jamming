@@ -1,6 +1,6 @@
 const clientID = '5b6f8d1b85a543459fcfe35b9fa324cc';
+const redirectURI = 'https://randoraz_jammming.netlify.app';
 //const redirectURI = 'http://randoraz_jammming.surge.sh';
-const redirectURI = 'http://localhost:3000/';
 
 let token;
 const Spotify = {
